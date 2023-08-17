@@ -8,6 +8,7 @@ import {
   updateBlog,
   getBlog,
   getBlogs,
+	deleteBlog,
 } from "../../controllers/Author"
 
 const router = express.Router()
@@ -25,6 +26,8 @@ router.get("/me", authenticateJWT, getUser)
 router.post("/blogs", authenticateJWT, createBlog)
 
 router.patch("/blogs/:blogId", authenticateJWT, updateBlog)
+
+router.delete("/blogs/:blogId",authenticateJWT,deleteBlog)
 
 router.get("/blogs", authenticateJWT, getBlogs)
 

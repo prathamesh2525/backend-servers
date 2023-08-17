@@ -70,6 +70,18 @@ const updateBlog = async (req: Request, res: Response) => {
   }
 }
 
+const deleteBlog = async(req:Request,res:Response)=>{
+	const blogId = req.params.blogId
+	const userId = req.headers["userId"]
+	const isdeleted = Blog.deleteOne({_id:blogId,author:userId})
+	if(isdeleted){
+		res.json({message:"Blog deleted..."})
+	}else{
+		res.status(404).json({message:"Blog not found"})
+	}
+
+}
+
 const getBlogs = async (req: Request, res: Response) => {
   const userId = req.headers["userId"]
   const blogs = await Blog.find({ author: userId })
@@ -93,6 +105,7 @@ export {
   getUser,
   createBlog,
   updateBlog,
+	deleteBlog,
   getBlog,
   getBlogs,
 }
